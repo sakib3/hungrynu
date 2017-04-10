@@ -12,15 +12,16 @@ class ProductsController extends Controller
         return compact('products');
     }
 
-    public function store(){
+    public function store(Request $request){
         $product = Product::create([
-            'name' => $request->name,
-            'parent' => $request->parent,
-            'price' => $request->price,
-            'description' => $request->description,
+            'name' => $request->input('name'),
+            'parent' => $request->input('parent'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
+        //return $product;
         $product->save();
     }
 }

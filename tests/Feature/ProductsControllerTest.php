@@ -33,4 +33,16 @@ class ProductsControllerTest extends TestCase
         $this->assertEquals('2017-04-09 23:04:00',$model[0]->updated_at);
     
     }
+
+    public function testShouldStoreProduct(){
+        $product = [
+                "name" => 'Berger',
+                'parent' => 1,
+                'price' => 50,
+                'description' => 'Fast Food',
+                '_token' => csrf_token()
+        ];
+        $response = $this->json('POST','/products', $product);
+        $response->assertStatus(200);
+    }
 }
