@@ -21,7 +21,17 @@ class ProductsController extends Controller
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
-        //return $product;
+        $product->save();
+    }
+
+    public function update(Request $request, $id){
+        $product = Product::find($id);
+        
+        $product->name = $request->input('name');
+        $product->parent = $request->input('parent');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+ 
         $product->save();
     }
 }
