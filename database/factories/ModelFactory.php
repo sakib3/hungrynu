@@ -34,3 +34,12 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'updated_at' => $faker->dateTime()
     ];
 });
+
+$factory->define(App\Menu::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'product_id' => $faker->randomNumber(1),
+        'created_at' => $faker->dateTime(),
+        'updated_at' => $faker->dateTime()
+    ];
+});

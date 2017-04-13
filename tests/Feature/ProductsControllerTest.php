@@ -11,6 +11,7 @@ use App\Product;
 class ProductsControllerTest extends TestCase
 {
     use DatabaseTransactions;
+    
     public function testShouldGetAllProducts()
     {
         $products = factory(Product::class)->create(
