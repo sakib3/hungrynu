@@ -20,3 +20,5 @@ Route::post('/products','ProductsController@store');
 Route::put('/products/{id}','ProductsController@update');
 
 Route::get('/menus', 'MenusController@index');
+Route::post('/menus', 'MenusController@store');
+Route::put('/menus/{id}', 'MenusController@update');

@@ -36,7 +36,15 @@ class MenusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $menu = factory(Menu::class)->make([
+            'name' => $request->input('name'),
+            'product_id' => $request->input('product_id'),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ]);
+        
+        $menu->save();
     }
 
     /**
@@ -68,11 +76,13 @@ class MenusController extends Controller
      * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
-    {
-        //
+     
+    public function update(Request $request, $id){
+        $menu = Menu::find($id);
+        $menu->name = $request->input('name');
+        $menu->product_id = $request->input('product_id'); 
+        $menu->save();
     }
-
     /**
      * Remove the specified resource from storage.
      *

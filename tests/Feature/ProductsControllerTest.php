@@ -48,16 +48,14 @@ class ProductsControllerTest extends TestCase
     }
 
     public function testShouldUpdateProduct(){
-        $products = factory(Product::class)->create(
-            [
+        $products = factory(Product::class)->create([
                 "name" => 'Berger',
                 'parent' => 1,
                 'price' => 50,
                 'description' => 'Fast Food',
                 'created_at' => '2017-04-09 23:04:00',
                 'updated_at' => '2017-04-09 23:04:00'
-            ]
-        );
+        ]);
         $this->app->instance('Product', $products);
         $existing = json_decode($this->call('GET','/products')->original['products']);
         $existingProductId = $existing[0]->id;
