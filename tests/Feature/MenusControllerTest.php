@@ -44,7 +44,7 @@ class MenusControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-        public function testShouldUpdateMenu(){
+    public function testShouldUpdateMenu(){
         $menu = factory(Menu::class)->create([
                 'name' => 'Starter',
                 'product_id' => 1,
@@ -52,7 +52,6 @@ class MenusControllerTest extends TestCase
                 'updated_at' => '2017-04-18 00:07:00'
         ]);
         $this->app->instance('Menu', $menu);
-        //dd($this->call('GET','/menus')->original['menus']);
         $existing = json_decode($this->call('GET','/menus')->original['menus']);
         $existingMenuId = $existing[0]->id;
 

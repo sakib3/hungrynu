@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Product;
+use App\Menu;
 
 class ProductsControllerTest extends TestCase
 {
@@ -75,5 +76,35 @@ class ProductsControllerTest extends TestCase
         $this->assertEquals(1,$model[0]->parent);
         $this->assertEquals(60,$model[0]->price);
         $this->assertEquals('Fast Food',$model[0]->description);
+    }
+
+    public function testShouldBuildProductBelongsToMenu(){
+        $menu = factory(Menu::class)->create(
+            [
+                "name" => 'Drinks',
+                'created_at' => '2017-04-16 00:07:00',
+                'updated_at' => '2017-04-16 00:07:00'
+            ]
+        );
+        $this->app->instance('Menu', $menu);
+        $menuModel = json_decode($this->call('GET','/menus')->original['menus']);
+        $menu_id = $menuModel[0]->id;
+
+        $product = factory(Product::class)->create(
+            [
+                "name" => 'Milk Shake',
+                'parent' => $menu_id,
+                'price' => 35,
+                'description' => 'Hot Drinks',
+                'created_at' => '2017-04-09 23:04:00',
+                'updated_at' => '2017-04-09 23:04:00'
+            ]
+        );
+        $this->app->instance('Product', $product);
+        $productModel = json_decode($this->call('GET','/products')->original['products']);
+        $milkShakeId = $productModel[0]->id;
+        $drink = json_decode(Product::find($milkShakeId)->menu()->first());
+        $this->assertEquals('Drinks',$drink->name);
+        
     }    
 }

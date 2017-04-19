@@ -10,4 +10,8 @@ class Product extends Model
         'parent','name','price','description'
     ];
 
+    public function menu()
+    {
+        return $this->belongsTo('App\Menu','parent');
+    }
 }
