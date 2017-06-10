@@ -22,3 +22,9 @@ Route::put('/products/{id}','ProductsController@update');
 Route::get('/menus', 'MenusController@index');
 Route::post('/menus', 'MenusController@store');
 Route::put('/menus/{id}', 'MenusController@update');
+
+Route::get('/cart', 'CartsController@index');
+Route::post('/cart', 'CartsController@store');
+Route::put('/cart/{id}', 'CartsController@update');
+Route::put('/cart', 'CartsController@updateBulk');
+Route::delete('/cart', 'CartsController@delete');
